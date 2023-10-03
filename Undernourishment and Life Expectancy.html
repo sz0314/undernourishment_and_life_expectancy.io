@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.15.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
+</head>
+<body>
+  <div id="vis"/>
+  <script>
+    const spec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/sz0314/life_expansion/main/life%20expectancy.csv",
+    "format": {"type": "csv"}
+  },
+  "transform": [
+    {"filter": "datum['Prevelance of Undernourishment'] > 0"},
+    {"filter": "datum['Life Expectancy World Bank'] >= 20"}
+  ],
+  "mark": "point",
+  "encoding": {
+    "x": {
+      "field": "Prevelance of Undernourishment",
+      "type": "quantitative",
+      "scale": {"zero": false},
+      "title": "Prevelance of Undernourishment [%]"
+    },
+    "y": {
+      "field": "Life Expectancy World Bank",
+      "type": "quantitative",
+      "scale": {"zero": false},
+      "title": "Life Expectancy [yrs]"
+    }
+  },
+  "title": "Correlation Between Undernourishment and Life Expectancy",
+  "width": 400,
+  "height": 300,
+  "config": {}
+};
+    vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+  </script>
+</body>
+</html>

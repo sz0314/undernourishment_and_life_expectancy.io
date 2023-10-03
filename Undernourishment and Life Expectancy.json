@@ -1,0 +1,30 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/sz0314/life_expansion/main/life%20expectancy.csv",
+    "format": {"type": "csv"}
+  },
+  "transform": [
+    {"filter": "datum['Prevelance of Undernourishment'] > 0"},
+    {"filter": "datum['Life Expectancy World Bank'] >= 20"}
+  ],
+  "mark": "point",
+  "encoding": {
+    "x": {
+      "field": "Prevelance of Undernourishment",
+      "type": "quantitative",
+      "scale": {"zero": false},
+      "title": "Prevelance of Undernourishment [%]"
+    },
+    "y": {
+      "field": "Life Expectancy World Bank",
+      "type": "quantitative",
+      "scale": {"zero": false},
+      "title": "Life Expectancy [yrs]"
+    }
+  },
+  "title": "Correlation Between Undernourishment and Life Expectancy",
+  "width": 400,
+  "height": 300,
+  "config": {}
+}
